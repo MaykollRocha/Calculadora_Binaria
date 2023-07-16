@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <math.h>
 #include <locale.h>
+#include <windows.h>
 #include "calc_arq_prototipacao.h"
 #include "base_algs.h"
 #include "alg_operacao.h"

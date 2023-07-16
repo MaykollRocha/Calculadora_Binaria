@@ -16,6 +16,23 @@ void printar_vetor_binario(int *vet,int tam)
     for(int i = tam-1; i>=0; i--)
         printf("\x1b[32m""%i""\x1b[0m",vet[i]);
 }
+
+/**
+    Tirei do site https://www.clubedohardware.com.br/forums/topic/729087-ajuda-com-a-função-gotoxyxy/
+    ele usa para mexer o curso dentro do programa.
+**/
+void gotoxy(int x, int y){
+     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),(COORD){x,y});
+}
+
+/**
+    Calcula o tamanho do inteiro em casas.
+**/
+int calc_tam(int calc)
+{
+        return (calc<0)?calc_tam(-1*calc)+1:(calc/10 >= 1 || calc==10)?calc_tam(calc/10)+1:1;
+}
+
 /**
     Toda a criação visual segue a mesma linha de raciocinio sendo o maximo de 100 carcteres
     ela é responsiva de acordo com o tamanho de bites pedidos ao início do código
@@ -32,7 +49,6 @@ void printar_vetor_binario(int *vet,int tam)
     Nos comentarios a umas parte que chamo de linha ou linha visual isso se refere as linhas de 100 caracteres que aparece em seu programa.
 **/
 
-
 void area_soma_op(int tam)
 {
     //Primeira linha cabeçalho que informa o tipo de operação.
@@ -45,20 +61,23 @@ void area_soma_op(int tam)
     //Assume um vetor de 2 inteiro grande por conta de que o int padrão não le o inte de 31 bits.
     long long int valor[2];
     fflush(stdin);//limpar o buffer anterior
-
+    int l=0;
     //Um laço para por os operandandos no vetor long long
     for(int i = 0; i<2; i++)
     {
         //Linha 2 e 3 caso não entre com nenhum erro
-        printf("|");
+        printf("|",l);
         for(int i=0; i<35; i++)printf(" ");
 
         printf("Valor %i em decimal: ",i+1); //Aviso de qual valor sera posto
+        //adicional que pode vir a occorer
         do
         {
             //Um laço para tratamento de entra caso seja posto um valor inviavel.
             scanf("%lld",&valor[i]);
-
+            gotoxy(56+calc_tam(valor[i]),1+i+l);
+            for(int j=0; j<45-calc_tam(valor[i]); j++)printf(" ");
+            printf("|\n");
             if(chek_caso_invalido(valor[i],tam))//Cheka o caso de ser um valor invalido.
             {
                 //Cria um espaço de 100 informando que não pode entrar com esse favalor e faz 2 linha a mais
@@ -67,17 +86,17 @@ void area_soma_op(int tam)
                 printf("\x1b[31m" "Seu numero estrapola a cacidade de bites""\x1b[0m");
                 printf("                         |\n|");
                 for(int i=0; i<35; i++)printf(" ");
-                printf("\x1b[31m""sendo essa um intervalo de %lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);//Mostra os valores permitidos de acordo com o tamanho do bit
-                int auxt = (tam==8)?27:(tam==16)?23:13;//Reponsivo para que não fique feio pois de acord com o tamnho do bit ele gasta mais espaço dentro do 100
+                printf("\x1b[31m""sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);//Mostra os valores permitidos de acordo com o tamanho do bit
+                int auxt = (tam==8)?26:(tam==16)?22:12;//Reponsivo para que não fique feio pois de acord com o tamnho do bit ele gasta mais espaço dentro do 100
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 fflush(stdin);//Limpada de buffer
-                printf("Tente outro valor:");//Pedido de novo valor
+                printf("Tente outro valor: ");//Pedido de novo valor
+                l+=3;
             }
         }
         while(chek_caso_invalido(valor[i],tam));
-        fflush(stdin);
     }
 
     //Linha 4 que é so divisora e informa que um resutado sera posto.
@@ -121,9 +140,26 @@ void area_soma_op(int tam)
     for(int i=0; i<50-(tam/2); i++)printf(" ");
     printar_vetor_binario(bin_sum(vet1,vet2,tam),tam);
     for(int i=0; i<50-(tam/2); i++)printf(" ");
+    printf("|\n|");
+
+    //Linha 10 caso haja um hover flow
+    if(bin_to_dec(bin_sum(vet1,vet2,tam),tam)!= (valor[0]+valor[1]))
+    {
+            if((valor[0]+valor[1])<0)
+            {
+                for(int i=0; i<45; i++)printf(" ");
+                printf("\x1b[31m""UNDERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }else{
+                for(int i=0; i<46; i++)printf(" ");
+                printf("\x1b[31m""OVERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }
+            printf("|\n|");
+    }
 
     //Linha 10 apresenta um pixel do fim e vira uma linha de 100 vazia.
-    printf("|\n|");
+
     for(int i=0; i<100; i++)printf(" ");
     printf("|\n");
 
@@ -155,14 +191,21 @@ void area_sub_op(int tam)
 
     long long int valor[2];
     fflush(stdin);
+    int l=0;
     for(int i = 0; i<2; i++)
     {
         printf("|");
         for(int i=0; i<35; i++)printf(" ");
+
         printf("Valor %s em decimal: ",(i==0)?"íncial":"subtrator");
         do
         {
+            int aux = (i==0)?61:64;
             scanf("%lld",&valor[i]);
+            gotoxy(aux+calc_tam(valor[i]),1+i+l);
+            aux = (i==0)?40:37;
+            for(int j=0; j<aux-calc_tam(valor[i]); j++)printf(" ");
+            printf("|\n");
             if(chek_caso_invalido(valor[i],tam))
             {
                 printf("|");
@@ -171,12 +214,13 @@ void area_sub_op(int tam)
                 printf("                         |\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 printf("\x1b[31m""sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==8)?27:(tam==16)?23:13;
+                int auxt = (tam==8)?26:(tam==16)?22:12;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 fflush(stdin);
-                printf("Tente outro valor:");
+                printf("Tente outro valor: ");
+                l+=3;
             }
         }
         while(chek_caso_invalido(valor[i],tam));
@@ -217,10 +261,31 @@ void area_sub_op(int tam)
     printf("|\n|");
 
 
+
+
     for(int i=0; i<50-(tam/2); i++)printf(" ");
     printar_vetor_binario(bin_sub(ini,sub,tam),tam);
     for(int i=0; i<50-(tam/2); i++)printf(" ");
     printf("|\n|");
+
+
+    if(bin_to_dec(bin_sub(ini,sub,tam),tam)!= (valor[0]-valor[1]))
+       {
+            if((valor[0]-valor[1])<0)
+            {
+                for(int i=0; i<45; i++)printf(" ");
+                printf("\x1b[31m""UNDERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }else{
+                for(int i=0; i<46; i++)printf(" ");
+                printf("\x1b[31m""OVERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }
+            printf("|\n|");
+       }
+
+
+
     for(int i=0; i<100; i++)printf(" ");
     printf("|\n");
 
@@ -246,14 +311,18 @@ void area_mult_op(int tam)
 
     long long int valor[2];
     fflush(stdin);
+    int l=0;
     for(int i = 0; i<2; i++)
     {
         printf("|");
         for(int i=0; i<35; i++)printf(" ");
         printf("Valor %s em decimal: ",(i==0)?"Multiplicador":"Multiplicando");
-        do
-        {
+
+        do{
             scanf("%lld",&valor[i]);
+            gotoxy(68+calc_tam(valor[i]),1+i+l);
+            for(int j=0; j<33-calc_tam(valor[i]); j++)printf(" ");
+            printf("|\n");
             if(chek_caso_invalido(valor[i],tam))
             {
                 printf("|");
@@ -262,12 +331,13 @@ void area_mult_op(int tam)
                 printf("                         |\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 printf("\x1b[31m""sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==8)?27:(tam==16)?23:13;
+                int auxt = (tam==8)?26:(tam==16)?22:12;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 fflush(stdin);
-                printf("Tente outro valor:");
+                printf("Tente outro valor: ");
+                l+=3;
             }
         }
         while(chek_caso_invalido(valor[i],tam));
@@ -319,6 +389,23 @@ void area_mult_op(int tam)
     printar_vetor_binario(resultado,tam);
     for(int i=0; i<50-(tam/2); i++)printf(" ");
     printf("|\n|");
+
+    if(bin_to_dec(resultado,tam)!= (valor[0]*valor[1]))
+    {
+        if((valor[0]/valor[1])<0)
+        {
+            for(int i=0; i<45; i++)printf(" ");
+            printf("\x1b[31m""UNDERFLOW""\x1b[0m");
+            for(int i=0; i<46; i++)printf(" ");
+        }else{
+            for(int i=0; i<46; i++)printf(" ");
+            printf("\x1b[31m""OVERFLOW""\x1b[0m");
+            for(int i=0; i<46; i++)printf(" ");
+        }
+        printf("|\n|");
+    }
+
+
     for(int i=0; i<100; i++)printf(" ");
     printf("|\n");
 
@@ -346,6 +433,7 @@ void area_div_op(int tam)
 
     long long int valor[2];
     fflush(stdin);
+    int l=0;
     for(int i = 0; i<2; i++)
     {
         printf("|");
@@ -353,7 +441,14 @@ void area_div_op(int tam)
         printf("Valor %s em decimal: ",(i==0)?"Divisor":"Dividendo");
         do
         {
+            int aux = (i==0)?62:64;
             scanf("%lld",&valor[i]);
+
+            gotoxy(aux+calc_tam(valor[i]),1+i+l);
+            aux = (i==0)?39:37;
+            for(int j=0; j<aux-calc_tam(valor[i]); j++)printf(" ");
+            printf("|\n");
+
             if(chek_caso_invalido(valor[i],tam))
             {
                 printf("|");
@@ -362,12 +457,13 @@ void area_div_op(int tam)
                 printf("                         |\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 printf("\x1b[31m""sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==8)?27:(tam==16)?23:13;
+                int auxt = (tam==8)?26:(tam==16)?22:12;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n|");
                 for(int i=0; i<35; i++)printf(" ");
                 fflush(stdin);
-                printf("Tente outro valor:");
+                printf("Tente outro valor: ");
+                l+=3;
             }
         }
         while(chek_caso_invalido(valor[i],tam));
@@ -380,64 +476,95 @@ void area_div_op(int tam)
     for(int i=0; i<45; i++)printf("-");
     printf("+\n");
 
-    //AREA DE OPERAR RESULTADOS
-    int *bin_div(int *M,int *Mult,int tam);
-
-    int *M,*Q,*resultado,quociente[tam],resto[tam];
-    M = dec_to_bin(valor[0],tam);
-    Q = dec_to_bin(valor[1],tam);
-    resultado = bin_div(M,Q,tam);
-    for(int i = 0; i < tam;i++) quociente[i] = resultado[i];
-    for(int i = tam,j=0; i < 2*tam;i++,j++) resto[j] = resultado[i];
-
-    //AREA DE PRINT
     printf("|");
     for(int i=0; i<100; i++)printf(" ");
     printf("|\n|");
+    if(valor[1]!=0)
+    {
+        //AREA DE OPERAR RESULTADOS
+        int *bin_div(int *M,int *Mult,int tam);
+
+        int *M,*Q,*resultado,quociente[tam],resto[tam];
+        M = dec_to_bin(valor[0],tam);
+        Q = dec_to_bin(valor[1],tam);
+        resultado = bin_div(M,Q,tam);
+        for(int i = 0; i < tam;i++) quociente[i] = resultado[i];
+        for(int i = tam,j=0; i < 2*tam;i++,j++) resto[j] = resultado[i];
+
+        //AREA DE PRINT
+        for(int i=0; i<39-(tam/2); i++)printf(" ");
+        printf("Dividendo: ");
+        printar_vetor_binario(Q,tam);
+        for(int i=0; i<50- (tam/2); i++)printf(" ");
+        printf("|\n|");
+
+        for(int i=0; i<41-(tam/2); i++)printf(" ");
+        printf("Divisor: ");
+        printar_vetor_binario(M,tam);
+        for(int i=0; i<50-(tam/2); i++)printf(" ");
+        printf("|\n|");
 
 
-    for(int i=0; i<39-(tam/2); i++)printf(" ");
-    printf("Dividendo: ");
-    printar_vetor_binario(Q,tam);
-    for(int i=0; i<50- (tam/2); i++)printf(" ");
-    printf("|\n|");
-
-    for(int i=0; i<41-(tam/2); i++)printf(" ");
-    printf("Divisor: ");
-    printar_vetor_binario(M,tam);
-    for(int i=0; i<50-(tam/2); i++)printf(" ");
-    printf("|\n|");
+        for(int i=0; i<49-(tam/2); i++)printf(" ");
+        for(int i=0; i<tam+2; i++)printf("-");
+        for(int i=0; i<49-(tam/2); i++)printf(" ");
+        printf("|\n|");
 
 
-    for(int i=0; i<49-(tam/2); i++)printf(" ");
-    for(int i=0; i<tam+2; i++)printf("-");
-    for(int i=0; i<49-(tam/2); i++)printf(" ");
-    printf("|\n|");
+        for(int i=0; i<39-(tam/2); i++)printf(" ");
+        printf("quociente: ");
+        printar_vetor_binario(quociente,tam);
+        for(int i=0; i<50-(tam/2); i++)printf(" ");
+        printf("|\n|");
+        for(int i=0; i<43-(tam/2); i++)printf(" ");
+        printf("Resto: ");
+        printar_vetor_binario(resto,tam);
+        for(int i=0; i<50-(tam/2); i++)printf(" ");
+        printf("|\n|");
+
+        if(bin_to_dec(quociente,tam)!= (int)(valor[1]/valor[0]) || bin_to_dec(resto,tam)!= (valor[1]%valor[0]))
+        {
+            printf("%i %i",(int)(valor[0]/valor[1]),(valor[0]%valor[1]));
+            if((valor[1]/valor[0])<0)
+            {
+                for(int i=0; i<45; i++)printf(" ");
+                printf("\x1b[31m""UNDERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }else{
+                for(int i=0; i<46; i++)printf(" ");
+                printf("\x1b[31m""OVERFLOW""\x1b[0m");
+                for(int i=0; i<46; i++)printf(" ");
+            }
+            printf("|\n|");
+        }
+
+        for(int i=0; i<100; i++)printf(" ");
+        printf("|\n");
+
+        printf("+");
+        for(int i=0; i<100; i++)printf("-");
+        printf("+\n");
+
+        for(int i=0; i<25; i++)printf(" ");
+        printf("resultado decimal: %lld / %lld = %lld resto %lld",bin_to_dec(Q,tam),bin_to_dec(M,tam),bin_to_dec(quociente,tam),bin_to_dec(resto,tam));
+
+        free(Q);
+        free(M);
+        free(resultado);
+    }else{
+        for(int i=0; i<34; i++)printf(" ");
+        printf("\x1b[31m""Não é permitido divisão por Zero""\x1b[0m");
+        for(int i=0; i<34; i++)printf(" ");
+        printf("|\n|");
+        for(int i=0; i<100; i++)printf(" ");
+        printf("|\n");
 
 
-    for(int i=0; i<39-(tam/2); i++)printf(" ");
-    printf("quociente: ");
-    printar_vetor_binario(quociente,tam);
-    for(int i=0; i<50-(tam/2); i++)printf(" ");
-    printf("|\n|");
-    for(int i=0; i<43-(tam/2); i++)printf(" ");
-    printf("Resto: ");
-    printar_vetor_binario(resto,tam);
-    for(int i=0; i<50-(tam/2); i++)printf(" ");
-    printf("|\n|");
-    for(int i=0; i<100; i++)printf(" ");
-    printf("|\n");
+        printf("+");
+        for(int i=0; i<100; i++)printf("-");
+        printf("+\n");
+    }
 
-    printf("+");
-    for(int i=0; i<100; i++)printf("-");
-    printf("+\n");
-
-    for(int i=0; i<25; i++)printf(" ");
-    printf("resultado decimal: %lld / %lld = %lld resto %lld",bin_to_dec(Q,tam),bin_to_dec(M,tam),bin_to_dec(quociente,tam),bin_to_dec(resto,tam));
-
-    free(Q);
-    free(M);
-    free(resultado);
 }
 
 void config(int *tam)
@@ -453,14 +580,12 @@ void config(int *tam)
                "+------------------+\n");
         printf("       Opção: ");
         scanf("%c",&op);
-
         switch(op)
         {
             case 'm':
             case 'M':
-                printf("    Entre com quantos bits sua calculadora vai trabalhar durantes esse processo(8,16,32): ");
+                printf("| Entre com quantos bits sua calculadora\n vai trabalhar durantes esse processo(8,16,32): ");
                 do{
-                    if(bit!=0&&bit!=8 && bit!=16 && bit!=32)printf("\x1b[31m" "Você entrou com um valor diferentes dos permitidos." "\x1b[0m""\nTente Novamente: ");
                     scanf("%i",&bit);
                 }while(bit!=8 && bit!=16 && bit!=32);
                 *tam = bit;

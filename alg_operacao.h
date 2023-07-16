@@ -163,4 +163,3 @@ int *bin_div(int *M,int *mult,int tam)
     return result;
 }
 #endif
-
