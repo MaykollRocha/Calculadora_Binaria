@@ -3,7 +3,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-14
+ * @date  (Ultima Atualização) 2023-07-16
 ***/
 #ifndef base_algs_h
 #define base_algs_h

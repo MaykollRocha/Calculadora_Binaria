@@ -14,7 +14,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-14
+ * @date  (Ultima Atualização) 2023-07-16
 ***/
 
 /**
@@ -58,14 +58,24 @@ int main()
     char op;
     while(1)
     {
-        printf("+-------MENU-------+\n| "
-               "\x1b[33m""'+'""\x1b[0m""soma          |\n| "
-               "\x1b[33m""'-'""\x1b[0m""subtração     |\n| "
-               "\x1b[33m""'*'""\x1b[0m""multiplicação |\n| "
-               "\x1b[33m""'/'""\x1b[0m""divisão       |\n| "
-               "\x1b[33m""'o'""\x1b[0m""config        |\n| "
-               "\x1b[33m""'e'""\x1b[0m""exit          |\n"
-               "+------------------+\n");
+        int c=45;//Tenta centralizar geometricamente o menu
+        gotoxy(c,2);//cada linha com essa função centraliza em Coluna e linha foi
+        printf("+-------MENU-------+\n");
+        gotoxy(c,3);
+        printf("| ""\x1b[33m""'+'""\x1b[0m""soma          |\n");
+        gotoxy(c,4);
+        printf("| ""\x1b[33m""'-'""\x1b[0m""subtração     |\n");
+        gotoxy(c,5);
+        printf("| ""\x1b[33m""'*'""\x1b[0m""multiplicação |\n");
+        gotoxy(c,6);
+        printf("| ""\x1b[33m""'/'""\x1b[0m""divisão       |\n");
+        gotoxy(c,7);
+        printf("| ""\x1b[33m""'o'""\x1b[0m""config        |\n");
+        gotoxy(c,8);
+        printf("| ""\x1b[33m""'e'""\x1b[0m""exit          |\n");
+        gotoxy(c,9);
+        printf("+------------------+");
+        gotoxy(c,10);
         printf("       Opção: ");
         scanf("%c",&op);
         switch(op)
@@ -74,25 +84,21 @@ int main()
                 system("cls");
                 area_soma_op(bit);
                 printf("\n");
-                for(int i=0; i<30; i++)printf(" ");
                 break;
             case '-':
                 system("cls");
                 area_sub_op(bit);
                 printf("\n");
-                for(int i=0; i<30; i++)printf(" ");
                 break;
             case '*':
                 system("cls");
                 area_mult_op(bit);
                 printf("\n");
-                for(int i=0; i<30; i++)printf(" ");
                 break;
             case '/':
                 system("cls");
                 area_div_op(bit);
                 printf("\n");
-                for(int i=0; i<30; i++)printf(" ");
                 break;
             case 'o':
             case 'O':
@@ -101,10 +107,13 @@ int main()
                 break;
             case 'e':
             case 'E':
+                system("cls");
                 return 1;
             default:
-                printf("\x1b[31m""Codigo invalido." "\x1b[0m");
+                gotoxy(c+3,11);
+                printf("\x1b[31m""Codigo invalido.\n" "\x1b[0m");
         }
+        for(int i =0;i<40;i++)printf(" ");
         printf("Aperte qualquer coisa para continua.");
         getch();
         system("cls");

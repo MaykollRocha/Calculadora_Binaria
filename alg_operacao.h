@@ -3,7 +3,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-14
+ * @date  (Ultima Atualização) 2023-07-16
 ***/
 #ifndef alg_operacao_h
 #define alg_operacao_h
@@ -11,6 +11,8 @@
 /**
     SOMA:
         De acordo com o livro e um carry.
+    Retorno:
+        O vetor de binário da soma dos dois binário
 **/
 int *bin_sum(int *vet1,int *vet2,int tam)
 {
@@ -33,9 +35,11 @@ int *bin_sum(int *vet1,int *vet2,int tam)
 }
 
 /**
-    SUBTRAÇÃO
-    Complemneto a dois e depois soma, pois é exatamento como a maquina faz.
-    (imagens provavelemente)
+    SUBTRAÇÃO:
+        Complemneto a dois e depois soma, pois é exatamento como a maquina faz.
+        (imagens provavelemente)
+    Retorno:
+        A soma do do primeiro binario com o complemento a dois do segundo binário
 **/
 int *bin_sub(int *vet1,int *vet2,int tam)
 {
@@ -111,6 +115,8 @@ int *bin_mult(int *M,int *Mult,int tam)
 /**
     DIVISÃO com delocamento soma e subtação;
     Seguindo o slide aplicando o algoritmos da imagem.
+
+    Retono: o vetor de A.Q onde A é o resto e Q o valor;
 **/
 int *bin_div(int *M,int *mult,int tam)
 {
