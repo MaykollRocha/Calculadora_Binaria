@@ -1,4 +1,4 @@
-#Calculadora Binária
+# Calculadora Binária
  <p align="center">Atividade Prática Arquitetura 2023.1</p>
     Esse é um trabalho desenvolvido por mim com o auxilo de um colega de sala, durante a matéria aquitetura e organização de 
   computadores um projeto prático avaliativo foi posto em pauta onde teriamos que senvolver uma calculadora bit,a bit onde eles
