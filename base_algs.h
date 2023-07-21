@@ -9,20 +9,21 @@
 #define base_algs_h
 
 /***
-    OBSERVAÇÕES DE PRÈ CÒDIGO
-        uma representação binária vai de 0100 que é 2 so que
-    a leitura do dois para 4 bits é 0010 so que meu programa leva em conta
+    OBSERVAÇÕES DE PRÉ-CÓDIGO
+        Uma representação binária vai de 0100 que é 2 só que
+    a leitura do dois para 4 bits é 0010, porém meu programa leva em conta
     que o indice é o valor a ser elevado.
     exemplo:
         Um vetor de [0,1,0,0] = vet[0]*1+vet[1]*2¹+vet[0]*2²+...+vet[n-1]*2^(n-1)
-        assim fica mais facil fazer as operações.
+        assim fica mais fácil realizar as operações.
 ***/
 
 /**
-    O pow da math.c tem um valor maximo muito baixo para 32 bits
-    e acaba gerando erros no meu código por conta disso fiz uma recursão
+    O pow da math.c tem um valor máximo muito baixo para 32 bits
+    e acaba gerando erros no meu código, por conta disso fiz uma recursão
     para alcançar o valor de desejo para 32bits.
 **/
+
 long long int tam_max(int tam)
 {
     if(tam==0)
@@ -31,7 +32,7 @@ long long int tam_max(int tam)
 }
 
 /***
-    Faz a expanssão de bits caso nescessario durante o codigo.
+    Faz a expansão de bits caso necessário durante o código.
 ***/
 int *expa_bit(int *vet,int tam,int ntam)
 {
@@ -43,8 +44,8 @@ int *expa_bit(int *vet,int tam,int ntam)
 }
 
 /***
-    Faz uma copia do vetor assim ele consegue mater mais seguro as informações
-    em algumas
+    Faz uma cópia do vetor, assim, ele consegue manter as informações mais seguras
+    em algumas funções.
 ***/
 int *copy_vet(int *vet,int tam)
 {
@@ -58,7 +59,7 @@ int *copy_vet(int *vet,int tam)
 
 /***
     Será utilizado para verificar se a soma ou a subtração ultrapassou
-    o limite de bits nescessario.retorna a soma.
+    o limite de bytes necessários. Retorna a soma.
 ***/
 long long int bin_to_dec(int *vet,int tam)
 {
@@ -79,8 +80,8 @@ long long int bin_to_dec(int *vet,int tam)
 }
 
 /**
-    Checa os casos invalidos onde o valor se econtra muito grande ou muito pequeno;
-    Usase a função recursiva que calcula o maximo.
+    Checa os casos inválidos onde o valor se econtra muito grande ou muito pequeno.
+    Usa-se a função recursiva que calcula o máximo.
 **/
 int chek_caso_invalido(long long int num,int tam)
 {
@@ -102,18 +103,18 @@ int *complement_of_2(int *vet,int tam)
 }
 
 /***
-        Essa parte faz a conversão de decimal para um vetor
-    binario de um vetor expecifico seus retornos podem
-    ser o vetor ou 0 representando o decimal não pode
-    ser expresso com aquele tanho do vetor predito
+        Essa parte faz a conversão decimal para um vetor
+    binário de um vetor específico. Seus retornos podem
+    ser o vetor ou 0. O decimal não pode
+    ser expresso com aquele tamanho do vetor predito.
 
 ***/
 int *dec_to_bin(int num,int tam)
 {
-    int *bin;//Vetor auxilar para fazer a carregamento e depois a exportação de bit's..
-    bin = malloc(tam*sizeof(int));//Aloca dinamicamento um vetor de valor inteiro.
+    int *bin;//Vetor auxilar para fazer a carregamento e depois a exportação de bits.
+    bin = malloc(tam*sizeof(int));//Aloca dinamicamente um vetor de valor inteiro.
 
-    int aux_comp = 0;//auxiliar para saver se é negativo
+    int aux_comp = 0;//Auxiliar para saber se é negativo.
     //Checa se o número é negativo com o bit de sinal que esta na ultima casa.
     if(num<0)
     {
@@ -121,23 +122,17 @@ int *dec_to_bin(int num,int tam)
         num *=-1;
     }
 
-    //faz o upadate no numero
+    //Realiza o update no número.
     for(int i =0; i<tam; i++)
     {
         bin[i] = num%2;
         num = num/2;
     }
-    //retorna em complemento a 2.
+    //Retorna em complemento a 2.
     if(aux_comp) return complement_of_2(bin,tam);
 
     return bin;
 }
-
-/**
-    Essa função não tem uso para quem ta querendo se divertir com os binários
-    é mais para quem quer ver funcinando a ideia de como foi feita a documentação
-    e se segue o ensinado pelo livro na parte da divisão e multiplicação.
-**/
 
 void print_pross(int *Q,int *A,int *M,int Qf,int tam)
 {
