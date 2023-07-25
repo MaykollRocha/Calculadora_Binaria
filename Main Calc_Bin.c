@@ -46,6 +46,7 @@
 
 int main()
 {
+
     int bit=0;
     setlocale(LC_ALL,"");
     printf("Entre com quantos bytes sua calculadora vai trabalhar durantes esse processo(4,8,16,32): ");

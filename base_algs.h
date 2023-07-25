@@ -134,14 +134,5 @@ int *dec_to_bin(int num,int tam)
     return bin;
 }
 
-void print_pross(int *Q,int *A,int *M,int Qf,int tam)
-{
-    for(int i = tam-1; i>=0; i--)printf("%i",A[i]);
-    printf(" ");
-    for(int i = tam-1; i>=0; i--)printf("%i",Q[i]);
-    printf(" %i ",Qf);
-    for(int i = tam-1; i>=0; i--)printf("%i",M[i]);
-    printf("\n");
-    return;
-}
+
 #endif

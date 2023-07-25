@@ -273,12 +273,17 @@ int *bin_div(int *M,int *mult,int tam)
         for(int i = tam-1; i>0 ;i--)
             A[i] = A[i-1];
         A[0] = Q[tam-1];
+
+
         for(int i = tam-1; i>0 ;i--)
             Q[i] = Q[i-1];
+        Q[0] = 0;
         print_div(Q,A,M,tam,"Desloca para esquerda");
+
         //Subtração
         A = bin_sub(A,M,tam);
         print_div(Q,A,M,tam,"Subtrai A <- A - M");
+
         //Esolha caso seja positivo ou negativo
         if(A[tam-1]==1)
         {

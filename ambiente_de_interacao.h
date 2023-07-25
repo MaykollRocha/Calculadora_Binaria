@@ -41,7 +41,6 @@ int calc_tam(int calc)
     Tema importante!!!
     Nos comentários há partes que chamo de linha ou linha visual, isso refere-se as linhas de 100 caracteres que aparece em seu programa.
 **/
-
 void area_soma_op(int tam)
 {
     int m = 8;
@@ -60,44 +59,43 @@ void area_soma_op(int tam)
     //Um laço para por os operandos no vetor 'long long'.
     for(int i = 0; i<2; i++)
     {
-        //Linha 2 e 3, caso não entre com nenhum erro.
         for(int i=0;i<m;i++)printf(" ");
-        printf("|",l);
+        printf("|");
         for(int i=0; i<35; i++)printf(" ");
 
-        printf("Valor %i em decimal: ",i+1); /*Aviso de qual valor será
-        adicionado que pode vir a ocorrer.*/
+        printf("Entre com %s decimal: ",(i==0)?"primeiro":"segundo");//"primeiro":"segundo"
         do
         {
-            //Um laço para tratamento de entrada caso seja inserido um valor inviável.
+            int aux = (i==0)?70:69;
             scanf("%lld",&valor[i]);
-            gotoxy(56+calc_tam(valor[i])+m,1+i+l);
-            for(int j=0; j<45-calc_tam(valor[i]); j++)printf(" ");
+            gotoxy(aux+calc_tam(valor[i])+m,1+i+l);
+            aux = (i==0)?31:32;
+            for(int j=0; j<aux-calc_tam(valor[i]); j++)printf(" ");
             printf("|\n");
-            if(chek_caso_invalido(valor[i],tam))//Analisa caso seja um valor inválido.
+            if(chek_caso_invalido(valor[i],tam))
             {
-                //Cria um espaço de 100char informando que não pode entrar com esse valor e faz 2 linhas a mais.
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<30; i++)printf(" ");
                 printf("\x1b[31m" "Seu número extrapola a capacidade de bytes""\x1b[0m");
-                printf("                       |\n");
+                printf("                            |\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
-                printf("\x1b[31m""Sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);//Mostra os valores permitidos de acordo com o tamanho do bit.
-                int auxt = (tam==4)?30:(tam==8)?26:(tam==16)?22:12;//Responsivo para que não fique feio. Pois, de acordo com o tamanho do bit ele gasta mais espaço dentro do 100char.
+                for(int i=0; i<32; i++)printf(" ");
+                printf("\x1b[31m""Sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
+                int auxt = (tam==4)?33:(tam==8)?29:(tam==16)?25:15;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
-                fflush(stdin);//Limpeza de buffer.
-                printf("Tente outro valor: ");//Pedido de novo valor.
+                for(int i=0; i<41; i++)printf(" ");
+                fflush(stdin);
+                printf("Tente outro valor: ");
                 l+=3;
             }
         }
         while(chek_caso_invalido(valor[i],tam));
+        fflush(stdin);
     }
     //Linha 4, apenas divisão e informa que um resultado será inserido.
     for(int i=0;i<m;i++)printf(" ");
@@ -215,34 +213,34 @@ void area_sub_op(int tam)
     {
         for(int i=0;i<m;i++)printf(" ");
         printf("|");
-        for(int i=0; i<35; i++)printf(" ");
+        for(int i=0; i<33; i++)printf(" ");
 
-        printf("Valor %s em Decimal: ",(i==0)?"inicial":"subtrator");
+        printf("Entre com %s em decimal: ",(i==0)?"minuendo":"subtraendo");
         do
         {
-            int aux = (i==0)?62:64;
+            int aux = (i==0)?65:67;
             scanf("%lld",&valor[i]);
             gotoxy(aux+calc_tam(valor[i])+m,1+i+l);
-            aux = (i==0)?39:37;
+            aux = (i==0)?36:34;
             for(int j=0; j<aux-calc_tam(valor[i]); j++)printf(" ");
             printf("|\n");
             if(chek_caso_invalido(valor[i],tam))
             {
-                 for(int i=0;i<m;i++)printf(" ");
-                printf("|");
-                for(int i=0; i<35; i++)printf(" ");
-                printf("\x1b[31m" "Seu número extrapola a capacidade de bytes""\x1b[0m");
-                printf("                       |\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<30; i++)printf(" ");
+                printf("\x1b[31m" "Seu número extrapola a capacidade de bytes""\x1b[0m");
+                printf("                            |\n");
+                for(int i=0;i<m;i++)printf(" ");
+                printf("|");
+                for(int i=0; i<32; i++)printf(" ");
                 printf("\x1b[31m""Sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==4)?30:(tam==8)?26:(tam==16)?22:12;
+                int auxt = (tam==4)?33:(tam==8)?29:(tam==16)?25:15;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<41; i++)printf(" ");
                 fflush(stdin);
                 printf("Tente outro valor: ");
                 l+=3;
@@ -372,19 +370,19 @@ void area_mult_op(int tam)
             {
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<30; i++)printf(" ");
                 printf("\x1b[31m" "Seu número extrapola a capacidade de bytes""\x1b[0m");
-                printf("                       |\n");
+                printf("                            |\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<32; i++)printf(" ");
                 printf("\x1b[31m""Sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==4)?30:(tam==8)?26:(tam==16)?22:12;
+                int auxt = (tam==4)?33:(tam==8)?29:(tam==16)?25:15;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<41; i++)printf(" ");
                 fflush(stdin);
                 printf("Tente outro valor: ");
                 l+=3;
@@ -522,19 +520,19 @@ void area_div_op(int tam)
             {
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<30; i++)printf(" ");
                 printf("\x1b[31m" "Seu número extrapola a capacidade de bytes""\x1b[0m");
-                printf("                       |\n");
+                printf("                            |\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<32; i++)printf(" ");
                 printf("\x1b[31m""Sendo essa um intervalo de -%lld até %lld""\x1b[0m",tam_max(tam-1),tam_max(tam-1)-1);
-                int auxt = (tam==4)?30:(tam==8)?26:(tam==16)?22:12;
+                int auxt = (tam==4)?33:(tam==8)?29:(tam==16)?25:15;
                 for(int i=0; i<auxt; i++)printf(" ");
                 printf("|\n");
                 for(int i=0;i<m;i++)printf(" ");
                 printf("|");
-                for(int i=0; i<35; i++)printf(" ");
+                for(int i=0; i<41; i++)printf(" ");
                 fflush(stdin);
                 printf("Tente outro valor: ");
                 l+=3;
@@ -551,24 +549,52 @@ void area_div_op(int tam)
     for(int i=0; i<45; i++)printf("-");
     printf("+\n");
 
-    for(int i=0;i<m;i++)printf(" ");
-    printf("|");
-    for(int i=0; i<100; i++)printf(" ");
-    printf("|\n");
-
-    if(valor[0]!=0)
-    {
         //ÁREA DE OPERAR RESULTADOS
         int *bin_div(int *M,int *Mult,int tam);
+        int nq,nr;//variaveis de negar cociente e negar resto
+        int *M,*Q,*resultado,*quociente,*resto;
+        nq=0;
+        nr=0;
+        quociente = malloc(tam*sizeof(int));
+        resto = malloc(tam*sizeof(int));
 
-        int *M,*Q,*resultado,quociente[tam],resto[tam];
-        M = dec_to_bin(valor[0],tam);
-        Q = dec_to_bin(valor[1],tam);
-        resultado = bin_div(M,Q,tam);
+        M = dec_to_bin(valor[0],tam);//Divisor
+        Q = dec_to_bin(valor[1],tam);//Dividendo
+
+
+        //Dentro do algoritmos existe diferente maneiras que as resposta são
+        // Q/-M = -quociente -resto
+        // -Q/M = -quociente resto
+        // -Q/-M = quociente -resto
+        if(Q[tam-1] == 1 && M[tam-1] == 0)
+        {
+            resultado = bin_div(M,complement_of_2(Q,tam),tam);
+            nq=1;
+            nr=1;
+        }else if(M[tam-1] == 1 && Q[tam-1] == 0)
+        {
+            resultado = bin_div(complement_of_2(M,tam),Q,tam);
+            nq=1;
+        }else if(M[tam-1] == 1 && Q[tam-1] == 1)
+        {
+            resultado = bin_div(complement_of_2(M,tam),complement_of_2(Q,tam),tam);
+            nr=1;
+        }else{
+            resultado = bin_div(M,Q,tam);
+        }
+
         for(int i = 0; i < tam;i++) quociente[i] = resultado[i];
         for(int i = tam,j=0; i < 2*tam;i++,j++) resto[j] = resultado[i];
+        if(nr) resto = complement_of_2(resto,tam);
+        if(nq) quociente = complement_of_2(quociente,tam);
 
         //ÁREA DE PRINT
+
+        for(int i=0;i<m;i++)printf(" ");
+        printf("|");
+        for(int i=0; i<100; i++)printf(" ");
+        printf("|\n");
+
         for(int i=0;i<m;i++)printf(" ");
         printf("|");
         for(int i=0; i<39-(tam/2); i++)printf(" ");
@@ -608,7 +634,15 @@ void area_div_op(int tam)
         for(int i=0; i<50-(tam/2); i++)printf(" ");
         printf("|\n");
 
-        if(bin_to_dec(quociente,tam)!= (int)(valor[1]/valor[0]) || bin_to_dec(resto,tam)!= (valor[1]%valor[0]))
+        if(valor[0]==0)
+        {
+            for(int i=0;i<m;i++)printf(" ");
+            printf("|");
+            for(int i=0; i<35; i++)printf(" ");
+            printf("DIVISÃO POR ZERO EXECUTADA!!!");
+            for(int i=0; i<34; i++)printf(" ");
+            printf("|\n");
+        }else if(valor[0]!=0 && bin_to_dec(quociente,tam)!= (int)(valor[1]/valor[0]) || bin_to_dec(resto,tam)!= (valor[1]%valor[0]))
         {
             for(int i=0;i<m;i++)printf(" ");
             printf("|");
@@ -641,8 +675,11 @@ void area_div_op(int tam)
 
         free(Q);
         free(M);
+        free(quociente);
+        free(resto);
         free(resultado);
-    }else{
+
+        /*
         for(int i=0;i<m;i++)printf(" ");
         printf("|");
         for(int i=0; i<34; i++)printf(" ");
@@ -658,7 +695,7 @@ void area_div_op(int tam)
         printf("+");
         for(int i=0; i<100; i++)printf("-");
         printf("+\n");
-    }
+        */
 
 }
 

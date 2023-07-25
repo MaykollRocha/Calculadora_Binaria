@@ -11,6 +11,7 @@
 //Funções de apoio de muita utilidade
 int *expa_bit(int *vet,int tam,int ntam);//Expansão de Bytes
 long long int bin_to_dec(int *vet,int tam);//Transforma binários em decimal
+long long int tam_max(int tam);//Calcula o tamanho dos numeros quantas casas decimais
 int chek_caso_invalido(long long int num,int tam);//Faz o checape de casos inválidos
 int *copy_vet(int *vet,int tam);//Copia o vetor binário
 
