@@ -15,7 +15,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-16
+ * @date  (Ultima Atualização) 2023-08-06
 ***/
 
 /**
@@ -33,6 +33,7 @@
         Seguimos para alg_operacao.h onde temos as operações e como elas foram baseadas.
         E por fim o ambiente_de_interacao.h, é de suma importância entender que ele não mostra as contas.
         Para saber mais como era o trabalho, esta na descrição do GITHUB.
+        link: https://github.com/MaykollRocha/Calculadora_Binaria
     Sobre Nos:
         Somos alunos de Engenharia de Computação fazendo a materia de Arquitura e Organização de Computadores
         E estamos no 5ºSemestre.

@@ -3,7 +3,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-16
+ * @date  (Ultima Atualização) 2023-08-06
 ***/
 #ifndef alg_operacao_h
 #define alg_operacao_h

@@ -3,7 +3,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-16
+ * @date  (Ultima Atualização) 2023-08-06
 ***/
 #ifndef ambiente_de_interacao_h
 #define ambiente_de_interacao_h
@@ -333,7 +333,7 @@ void area_sub_op(int tam)
     printf("+\n");
 
     for(int i=0; i<35+m; i++)printf(" ");
-    printf("resultado decimal: %lld - %lld = %lld",bin_to_dec(ini,tam),bin_to_dec(sub,tam),bin_to_dec(bin_sub(ini,sub,tam),tam));
+    printf("Resultado Decimal: %lld - %lld = %lld",bin_to_dec(ini,tam),bin_to_dec(sub,tam),bin_to_dec(bin_sub(ini,sub,tam),tam));
     free(ini);
     free(sub);
 }
@@ -359,7 +359,7 @@ void area_mult_op(int tam)
         for(int i=0;i<m;i++)printf(" ");
         printf("|");
         for(int i=0; i<35; i++)printf(" ");
-        printf("Valor %s em decimal: ",(i==1)?"Multiplicador":"Multiplicando");
+        printf("Valor %s em Decimal: ",(i==1)?"Multiplicador":"Multiplicando");
 
         do{
             scanf("%lld",&valor[i]);
@@ -679,24 +679,6 @@ void area_div_op(int tam)
         free(resto);
         free(resultado);
 
-        /*
-        for(int i=0;i<m;i++)printf(" ");
-        printf("|");
-        for(int i=0; i<34; i++)printf(" ");
-        printf("\x1b[31m""Não é permitido divisão por Zero""\x1b[0m");
-        for(int i=0; i<34; i++)printf(" ");
-        printf("|\n");
-        for(int i=0;i<m;i++)printf(" ");
-        printf("|");
-        for(int i=0; i<100; i++)printf(" ");
-        printf("|\n");
-
-        for(int i=0;i<m;i++)printf(" ");
-        printf("+");
-        for(int i=0; i<100; i++)printf("-");
-        printf("+\n");
-        */
-
 }
 
 void config(int *tam)
@@ -715,7 +697,7 @@ void config(int *tam)
         printf("| ""\x1b[33m""'m'""\x1b[0m""Mudar Tamanho|\n");
         l++;
         gotoxy(c,l);
-        printf("| ""\x1b[33m""'r'""\x1b[0m""returne      |\n");
+        printf("| ""\x1b[33m""'r'""\x1b[0m""Retorne      |\n");
         l++;
         gotoxy(c,l);
         printf("+-----------------+\n");
@@ -732,7 +714,7 @@ void config(int *tam)
                 printf("    Entre com quantos bits sua calculadora\n");
                 l++;
                 gotoxy(c-12,l);
-                printf("vai trabalhar durantes esse processo(8,16,32): ");
+                printf("Vai trabalhar durantes esse processo(8,16,32): ");
                 do{
                     if(bit!=8 && bit!=16 && bit!=32 && bit!=4){
                         gotoxy(c+34,l);

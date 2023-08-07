@@ -3,7 +3,7 @@
  * @email <maykoll.rocha422@academico.ufgd.edu.br>
  * @email <rafael.silva488@academico.ufgd.edu.br>
  * @date  (início) 2023-07-13
- * @date  (Ultima Atualização) 2023-07-16
+ * @date  (Ultima Atualização) 2023-08-06
 ***/
 #ifndef base_algs_h
 #define base_algs_h
@@ -11,7 +11,7 @@
 /***
     OBSERVAÇÕES DE PRÉ-CÓDIGO
         Uma representação binária vai de 0100 que é 2 só que
-    a leitura do dois para 4 bits é 0010, porém meu programa leva em conta
+    a leitura do dois para 4 bits é 0010, porém, o programa leva em conta
     que o indice é o valor a ser elevado.
     exemplo:
         Um vetor de [0,1,0,0] = vet[0]*1+vet[1]*2¹+vet[0]*2²+...+vet[n-1]*2^(n-1)
@@ -20,7 +20,7 @@
 
 /**
     O pow da math.c tem um valor máximo muito baixo para 32 bits
-    e acaba gerando erros no meu código, por conta disso fiz uma recursão
+    e acaba gerando erros no código, por conta disso, fiz uma recursão
     para alcançar o valor de desejo para 32bits.
 **/
 
